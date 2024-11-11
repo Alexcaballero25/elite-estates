@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+
+namespace InmobiliariaApp
+{
+    class Program
+    {
+        // Clase que representa una propiedad
+        public class Propiedad
+        {
+            public string Direccion { get; set; }
+            public double Precio { get; set; }
+            public int Habitaciones { get; set; }
+
+            public override string ToString()
+            {
+                return $"Dirección: {Direccion}, Precio: {Precio}, Habitaciones: {Habitaciones}";
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            List<Propiedad> propiedades = new List<Propiedad>();
+            int opcion;
+
+            do
+            {
+                Console.WriteLine("=== Sistema de Inmobiliaria ===");
+                Console.WriteLine("1. Agregar Propiedad");
+                Console.WriteLine("2. Listar Propiedades");
+                Console.WriteLine("3. Salir");
+                Console.Write("Seleccione una opción: ");
+                opcion = Convert.ToInt32(Console.ReadLine());
+
+                switch (opcion)
+                {
+                    case 1:
+                        AgregarPropiedad(propiedades);
+                        break;
+                    case 2:
+                        ListarPropiedades(propiedades);
+                        break;
+                    case 3:
+                        Console.WriteLine("Saliendo...");
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Intente de nuevo.");
+                        break;
+                }
+
+            } while (opcion != 3);
+        }
+
+        static void AgregarPropiedad(List<Propiedad> propiedades)
+        {
+            Propiedad nuevaPropiedad = new Propiedad();
+
+            Console.Write("Ingrese la dirección de la propiedad: ");
+            nuevaPropiedad.Direccion = Console.ReadLine();
+
+            Console.Write("Ingrese el precio de la propiedad: ");
+            nuevaPropiedad.Precio = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Ingrese el número de habitaciones: ");
+            nuevaPropiedad.Habitaciones = Convert.ToInt32(Console.ReadLine());
+
+            propiedades.Add(nuevaPropiedad);
+            Console.WriteLine("Propiedad agregada exitosamente.");
+        }
+
+        static void ListarPropiedades(List<Propiedad> propiedades)
+        {
+            Console.WriteLine("=== Lista de Propiedades ===");
+            if (propiedades.Count == 0)
+            {
+                Console.WriteLine("No hay propiedades registradas.");
+            }
+            else
+            {
+                foreach (var propiedad in propiedades)
+                {
+                    Console.WriteLine(propiedad);
+                }
+            }
+        }
+    }
+}
